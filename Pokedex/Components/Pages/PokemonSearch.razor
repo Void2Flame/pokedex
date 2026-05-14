@@ -6,9 +6,14 @@
 
 <h3>Pokémon Search</h3>
 
-<input @bind="searchTerm" placeholder="Enter Pokémon name or ID" />
+<input class="inputPokemon" @bind="searchTerm" placeholder="Enter Pokémon name or ID" />
 <button @onclick="SearchPokemon">Search</button>
 
+<style>
+    .inputPokemon{
+        width: 250px;
+    }
+</style>
 @if (isLoading)
 {
     <p>Loading...</p>
