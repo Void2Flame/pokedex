@@ -1,6 +1,7 @@
 using Pokedex.Components;
 using Pokedex.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
