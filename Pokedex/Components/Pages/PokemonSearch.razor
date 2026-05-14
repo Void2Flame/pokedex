@@ -20,10 +20,80 @@ else if (pokemon is not null)
     <p>Height: @pokemon.Height</p>
     <p>Weight: @pokemon.Weight</p>
 
+     @if (pokemon.Types.Count > 0)
+    {
+        <p>Types:</p>
+
+        <div>
+            @foreach (var typeSlot in pokemon.Types)
+            {
+                <span style="margin-right: 8px; padding: 4px 8px; border: 1px solid black; border-radius: 8px;">
+                    @typeSlot.Type.Name
+                </span>
+            }
+        </div>
+    }
+
+    @if (pokemon.Abilities.Count > 0)
+    {
+        <p>Abilities:</p>
+
+        <ul>
+            @foreach (var abilitySlot in pokemon.Abilities)
+            {
+                <li>
+                    @abilitySlot.Ability.Name
+
+                    @if (abilitySlot.IsHidden)
+                    {
+                        <span> - Hidden Ability</span>
+                    }
+                </li>
+            }
+        </ul>
+    }
+    
+    @if (species is not null)
+    {
+        <h4>Species Info</h4>
+        <p>Color: @species.Color.Name</p>
+        <p>Habitat: @species.Habitat.Name</p>
+        <p>Capture Rate: @species.CaptureRate</p>
+        <p>Base Happiness: @species.BaseHappiness</p>
+        var englishGenus = species.Genera
+            .FirstOrDefault(g => g.Language.Name == "en")
+            ?.Genus;
+
+        if (!string.IsNullOrEmpty(englishGenus))
+        {
+            <p>Category: @englishGenus</p>
+        }
+
+        var englishDescription = species.FlavorTextEntries
+            .FirstOrDefault(f => f.Language.Name == "en")
+            ?.FlavorText
+            .Replace("\n", " ")
+            .Replace("\f", " ");
+        
+        @if (!string.IsNullOrEmpty(englishDescription))
+        {
+            <p>Description: @englishDescription</p>
+        }
+    }
+
     @if (!string.IsNullOrEmpty(pokemon.Sprites.FrontDefault))
     {
         <img src="@pokemon.Sprites.FrontDefault" alt="@pokemon.Name" />
     }
+
+    @if (!string.IsNullOrEmpty(pokemon.Cries.Latest))
+{
+    <p>Pokemon Cry:</p>
+    <audio controls>
+        <source src="@pokemon.Cries.Latest" type="audio/ogg" />
+        Your browser does not support the audio element.
+    </audio>
+}
 }
 else if (hasSearched)
 {
@@ -31,24 +101,28 @@ else if (hasSearched)
 }
 
 @code {
-    private string searchTerm = "pikachu";
+    private string searchTerm;
     private Pokemon? pokemon;
     private bool isLoading = false;
     private bool hasSearched = false;
+    private PokemonSpecies? species;
 
     private async Task SearchPokemon()
     {
         isLoading = true;
         hasSearched = true;
         pokemon = null;
+        species = null;
 
         try
         {
             pokemon = await PokeApi.GetPokemonAsync(searchTerm);
+            species = await PokeApi.GetPokemonSpeciesAsync(searchTerm);
         }
         catch
         {
             pokemon = null;
+            species = null;
         }
 
         isLoading = false;
