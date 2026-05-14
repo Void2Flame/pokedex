@@ -1,0 +1,55 @@
+@page "/pokemon"
+@using Pokedex.PokemonData
+@using Pokedex.Services
+@inject PokeApiService PokeApi
+
+<h3>Pokémon Search</h3>
+
+<input @bind="searchTerm" placeholder="Enter Pokémon name or ID" />
+<button @onclick="SearchPokemon">Search</button>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (pokemon is not null)
+{
+    <h4>@pokemon.Name</h4>
+    <p>ID: @pokemon.Id</p>
+    <p>Height: @pokemon.Height</p>
+    <p>Weight: @pokemon.Weight</p>
+
+    @if (!string.IsNullOrEmpty(pokemon.Sprites.FrontDefault))
+    {
+        <img src="@pokemon.Sprites.FrontDefault" alt="@pokemon.Name" />
+    }
+}
+else if (hasSearched)
+{
+    <p>No Pokémon found.</p>
+}
+
+@code {
+    private string searchTerm = "pikachu";
+    private Pokemon? pokemon;
+    private bool isLoading = false;
+    private bool hasSearched = false;
+
+    private async Task SearchPokemon()
+    {
+        isLoading = true;
+        hasSearched = true;
+        pokemon = null;
+
+        try
+        {
+            pokemon = await PokeApi.GetPokemonAsync(searchTerm);
+        }
+        catch
+        {
+            pokemon = null;
+        }
+
+        isLoading = false;
+    }
+}
