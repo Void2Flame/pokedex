@@ -16,4 +16,12 @@ public class PokeApiService
     {
         return await _httpClient.GetFromJsonAsync<Pokemon>($"pokemon/{nameOrId.ToLower()}");
     }
+
+    public async Task<PokemonSpecies?> GetPokemonSpeciesAsync(string nameOrId)
+    {
+        return await _httpClient.GetFromJsonAsync<PokemonSpecies>(
+        $"pokemon-species/{nameOrId.ToLower()}"
+        );
+    }
+
 }
