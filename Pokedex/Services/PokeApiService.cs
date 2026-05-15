@@ -32,7 +32,7 @@ public class PokeApiService
     public async Task<List<PokemonListItem>> GetAllPokemonAsync ()
     {
         var response = await _httpClient.GetFromJsonAsync<PokemonListReponse>(
-            "pokemon?limit=1300"
+            "pokemon-species?limit=1300"
         );
 
         return response?.Results ?? new List<PokemonListItem>();

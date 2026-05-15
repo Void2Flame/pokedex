@@ -9,15 +9,6 @@ public class PokemonSpecies
     public int Id { get; set; }
     public string Name { get; set; } = "";
 
-    [JsonPropertyName("base_happiness")]
-    public int BaseHappiness { get; set; }
-
-    [JsonPropertyName("capture_rate")]
-    public int CaptureRate { get; set; }
-
-    public PokemonSpeciesInfo Color { get; set; } = new();
-    public PokemonSpeciesInfo Habitat { get; set; } = new();
-
     [JsonPropertyName("flavor_text_entries")]
     public List<FlavorTextEntry> FlavorTextEntries { get; set; } = new();
 

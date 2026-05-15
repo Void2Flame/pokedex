@@ -17,7 +17,7 @@
 <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
     @foreach (var pokemonItem in allPokemon
         .Where(p => string.IsNullOrWhiteSpace(pokemonListFilter) 
-            || p.Name.Contains(pokemonListFilter.ToLower()))
+            || p.Name.Contains(pokemonListFilter.Trim().ToLower()))
         .OrderBy(p => p.Name))
     {
         <button type="button"
@@ -56,6 +56,21 @@ else if (pokemon is not null)
                 </span>
             }
         </div>
+    }
+
+
+    @if (pokemon.Stats.Count > 0)
+    {
+        <h4>Stats</h4>
+
+        <ul>
+            @foreach (var statSlot in pokemon.Stats)
+            {
+                <li>
+                    @FormatStatName(statSlot.Stat.Name): @statSlot.BaseStat
+                </li>
+            }
+        </ul>
     }
 
     @if (pokemon.Abilities.Count > 0)
@@ -113,7 +128,7 @@ else if (pokemon is not null)
 
     @if (!string.IsNullOrEmpty(pokemon.Sprites.FrontDefault))
     {
-        <img src="@pokemon.Sprites.FrontDefault" alt="@pokemon.Name" />
+        <img src="@pokemon.Sprites.Other.OfficialArtwork.FrontDefault" alt="@pokemon.Name" style="width: 250px" />
     }
 
     @if (evolutionNames.Count > 0)
@@ -199,5 +214,19 @@ else if (hasSearched)
         }
 
         return names;
+    }
+
+    private string FormatStatName(string statName)
+    {
+        return statName switch
+        {
+            "hp" => "HP",
+            "attack" => "Attack",
+            "defense" => "Defense",
+            "special-attack" => "Special Attack",
+            "special-defense" => "Special Defense",
+            "speed" => "Speed",
+            _   => statName
+        };
     }
 }
