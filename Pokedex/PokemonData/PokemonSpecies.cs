@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Net.Http.Headers;
 
 namespace Pokedex.PokemonData;
 
@@ -6,15 +8,6 @@ public class PokemonSpecies
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
-
-    [JsonPropertyName("base_happiness")]
-    public int BaseHappiness { get; set; }
-
-    [JsonPropertyName("capture_rate")]
-    public int CaptureRate { get; set; }
-
-    public PokemonSpeciesInfo Color { get; set; } = new();
-    public PokemonSpeciesInfo Habitat { get; set; } = new();
 
     [JsonPropertyName("flavor_text_entries")]
     public List<FlavorTextEntry> FlavorTextEntries { get; set; } = new();
@@ -24,6 +17,26 @@ public class PokemonSpecies
 
     [JsonPropertyName("genera")]
     public List<PokemonGenus> Genera { get; set; } = new();
+}
+
+
+public class PokemonEvolutionChain
+{
+    public EvolutionChainLink Chain { get; set; } = new();
+}
+
+public class EvolutionChainLink
+{
+    public EvolutionSpecies Species { get; set;} = new ();
+    [JsonPropertyName("evolves_to")]
+    public List<EvolutionChainLink> EvolvesTo { get; set; } = new ();
+}
+
+
+public class EvolutionSpecies
+{
+    public string Name { get; set; } = "";
+    public string Url { get; set; } = "";
 }
 
 public class PokemonSpeciesInfo

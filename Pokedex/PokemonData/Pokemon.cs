@@ -10,11 +10,10 @@ public class Pokemon
     public int Weight { get; set; }
     public PokemonSprites Sprites { get; set; } = new();
 
-    public PokemonCries Cries { get; set; } = new();
-
     public List <PokemonTypeSlot> Types { get; set; } = new();
 
     public List<PokemonAbilitySlot> Abilities { get; set; } = new();
+    public List<PokemonStatSlot> Stats { get; set; } = new();
 
 }
 
@@ -22,14 +21,22 @@ public class PokemonSprites
 {
     [JsonPropertyName("front_default")]
     public string? FrontDefault { get; set; }
+
+    [JsonPropertyName("other")]
+    public PokemonOtherSprites Other { get; set; } = new();
 }
 
-public class PokemonCries
+public class PokemonOtherSprites
 {
-    public string? Latest { get; set; }
-    public string? Legacy { get; set; }
+    [JsonPropertyName("official-artwork")]
+    public OfficialArtwork OfficialArtwork { get; set; } = new();
 }
 
+public class OfficialArtwork
+{
+    [JsonPropertyName("front_default")]
+    public string? FrontDefault { get; set; }
+}
 
 public class PokemonTypeSlot
 {
@@ -55,6 +62,22 @@ public class PokemonAbilitySlot
 }
 
 public class PokemonAbilityInfo
+{
+    public string Name { get; set; } = "";
+    public string Url { get; set; } = "";
+}
+
+public class PokemonStatSlot
+{
+    [JsonPropertyName("base_stat")]
+    public int BaseStat { get; set; }
+
+    public int Effort { get; set; }
+
+    public PokemonStatInfo Stat { get; set; } = new();
+}
+
+public class PokemonStatInfo
 {
     public string Name { get; set; } = "";
     public string Url { get; set; } = "";
