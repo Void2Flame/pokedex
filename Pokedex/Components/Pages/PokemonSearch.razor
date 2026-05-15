@@ -1,5 +1,6 @@
 @page "/pokemon"
 @rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using Pokedex.Services
 @using Pokedex.PokemonData
 @inject PokeApiService PokeApi
@@ -8,6 +9,24 @@
 
 <input class="inputPokemon" @bind="searchTerm" placeholder="Enter Pokémon name or ID" />
 <button @onclick="SearchPokemon">Search</button>
+
+<h4>All Pokémon</h4>
+
+<input @bind="pokemonListFilter" placeholder="Filter Pokémon list..." />
+
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+    @foreach (var pokemonItem in allPokemon
+        .Where(p => string.IsNullOrWhiteSpace(pokemonListFilter) 
+            || p.Name.Contains(pokemonListFilter.ToLower()))
+        .OrderBy(p => p.Name))
+    {
+        <button type="button"
+                @onclick="() => SelectPokemon(pokemonItem.Name)"
+                style="display: block; margin-bottom: 5px;">
+            @pokemonItem.Name
+        </button>
+    }
+</div>
 
 <style>
     .inputPokemon{
@@ -61,10 +80,6 @@ else if (pokemon is not null)
     @if (species is not null)
     {
         <h4>Species Info</h4>
-        <p>Color: @species.Color.Name</p>
-        <p>Habitat: @species.Habitat.Name</p>
-        <p>Capture Rate: @species.CaptureRate</p>
-        <p>Base Happiness: @species.BaseHappiness</p>
         var englishGenus = species.Genera
             .FirstOrDefault(g => g.Language.Name == "en")
             ?.Genus;
@@ -74,15 +89,25 @@ else if (pokemon is not null)
             <p>Category: @englishGenus</p>
         }
 
-        var englishDescription = species.FlavorTextEntries
-            .FirstOrDefault(f => f.Language.Name == "en")
-            ?.FlavorText
-            .Replace("\n", " ")
-            .Replace("\f", " ");
-        
-        @if (!string.IsNullOrEmpty(englishDescription))
+        var flavorTextEntries = species.FlavorTextEntries
+        .Where(entry => entry.Language.Name == "en")
+        .Select(entry => entry.FlavorText
+        .Replace("\n", " ")
+        .Replace("\f", " "))
+        .Distinct()
+        .Take(4)
+        .ToList();
+
+        if (flavorTextEntries.Count > 0)
         {
-            <p>Description: @englishDescription</p>
+            <h4>Pokédex Descriptions</h4>
+
+            <ul>
+            @foreach (var entry in flavorTextEntries)
+            {
+                <li>@entry</li>
+            }
+            </ul>
         }
     }
 
@@ -91,26 +116,44 @@ else if (pokemon is not null)
         <img src="@pokemon.Sprites.FrontDefault" alt="@pokemon.Name" />
     }
 
-    @if (!string.IsNullOrEmpty(pokemon.Cries.Latest))
-{
-    <p>Pokemon Cry:</p>
-    <audio controls>
-        <source src="@pokemon.Cries.Latest" type="audio/ogg" />
-        Your browser does not support the audio element.
-    </audio>
-}
+    @if (evolutionNames.Count > 0)
+    {
+        <h4>Evolution Chain</h4>
+        <ul>
+            @foreach (var evolutionName in evolutionNames)
+            {
+                <li>@evolutionName</li>
+            }
+        </ul>
+    }
 }
 else if (hasSearched)
 {
     <p>No Pokémon found.</p>
 }
 
-@code {
+@code 
+{
     private string searchTerm;
     private Pokemon? pokemon;
     private bool isLoading = false;
     private bool hasSearched = false;
     private PokemonSpecies? species;
+    private List<string> evolutionNames = new();
+
+    private List<PokemonListItem> allPokemon = new();
+    private string pokemonListFilter = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        allPokemon = await PokeApi.GetAllPokemonAsync();
+    }
+
+    private async Task SelectPokemon(string PokemonName)
+    {
+        searchTerm = PokemonName;
+        await SearchPokemon();
+    }
 
     private async Task SearchPokemon()
     {
@@ -118,11 +161,22 @@ else if (hasSearched)
         hasSearched = true;
         pokemon = null;
         species = null;
+        evolutionNames.Clear();
 
         try
         {
             pokemon = await PokeApi.GetPokemonAsync(searchTerm);
             species = await PokeApi.GetPokemonSpeciesAsync(searchTerm);
+
+            if (species is not null && !string.IsNullOrEmpty(species.EvolutionChain.Url))
+            {
+                var EvolutionChain = await PokeApi.GetEvolutionChainAsync(species.EvolutionChain.Url);
+
+                if(EvolutionChain is not null)
+                {
+                    evolutionNames = GetEvolutionNames(EvolutionChain.Chain);
+                }
+            }
         }
         catch
         {
@@ -131,5 +185,19 @@ else if (hasSearched)
         }
 
         isLoading = false;
+    }
+
+    private List<string> GetEvolutionNames(EvolutionChainLink chainLink)
+    {
+        var names = new List<string>();
+
+        names.Add(chainLink.Species.Name);
+
+        foreach (var evolution in chainLink.EvolvesTo)
+        {
+            names.AddRange(GetEvolutionNames(evolution));
+        }
+
+        return names;
     }
 }

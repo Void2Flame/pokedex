@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Net.Http.Headers;
 
 namespace Pokedex.PokemonData;
 
@@ -24,6 +26,26 @@ public class PokemonSpecies
 
     [JsonPropertyName("genera")]
     public List<PokemonGenus> Genera { get; set; } = new();
+}
+
+
+public class PokemonEvolutionChain
+{
+    public EvolutionChainLink Chain { get; set; } = new();
+}
+
+public class EvolutionChainLink
+{
+    public EvolutionSpecies Species { get; set;} = new ();
+    [JsonPropertyName("evolves_to")]
+    public List<EvolutionChainLink> EvolvesTo { get; set; } = new ();
+}
+
+
+public class EvolutionSpecies
+{
+    public string Name { get; set; } = "";
+    public string Url { get; set; } = "";
 }
 
 public class PokemonSpeciesInfo

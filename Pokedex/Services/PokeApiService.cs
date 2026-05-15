@@ -24,4 +24,18 @@ public class PokeApiService
         );
     }
 
+    public async Task<PokemonEvolutionChain?> GetEvolutionChainAsync(string evolutionChainUrl)
+    {
+        return await _httpClient.GetFromJsonAsync<PokemonEvolutionChain>(evolutionChainUrl);
+    }
+
+    public async Task<List<PokemonListItem>> GetAllPokemonAsync ()
+    {
+        var response = await _httpClient.GetFromJsonAsync<PokemonListReponse>(
+            "pokemon?limit=1300"
+        );
+
+        return response?.Results ?? new List<PokemonListItem>();
+    }
+
 }
