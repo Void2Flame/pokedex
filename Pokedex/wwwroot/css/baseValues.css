@@ -1,0 +1,24 @@
+:root
+{
+    --color-background-primary: #ffffff;
+
+    /*Base text*/
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+.WebContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.NavContainer {
+    background-color: var(--color-background-primary);
+    border-right: #000000 1px;
+    width: 20rem;
+}
