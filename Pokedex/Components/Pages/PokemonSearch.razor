@@ -5,17 +5,14 @@
 @inject PokeApiService PokeApi
 <div class="WebContainer">
     <div class="NavContainer">
+        <h4>Pokedex</h4>
         <input class="inputPokemon" @bind="searchTerm" placeholder="Enter Pokémon name or ID" />
         <button @onclick="SearchPokemon">Search</button>
 
-        <h4>All Pokémon</h4>
-
-        <input @bind="pokemonListFilter" placeholder="Filter Pokémon list..." />
-
         <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
                 @foreach (var pokemonItem in allPokemon
-                    .Where(p => string.IsNullOrWhiteSpace(pokemonListFilter) 
-                        || p.Name.Contains(pokemonListFilter.Trim().ToLower()))
+                    .Where(p => string.IsNullOrWhiteSpace(searchTerm) 
+                        || p.Name.Contains(searchTerm.Trim().ToLower()))
                     .OrderBy(p => p.Name))
                     {
                     <button type="button"
