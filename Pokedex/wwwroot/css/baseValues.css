@@ -1,6 +1,26 @@
 :root
 {
-    --color-background-primary: #ffffff;
+
+    /*Base color to black*/
+    --vxa-grey-0: #F9FAFB;
+    --vxa-grey-100: #F3F4F6;
+    --vxa-grey-200: #E5E7EB;
+    --vxa-grey-300: #D1D5DC;
+    --vxa-grey-400: #99A1AF;
+    --vxa-grey-500: #6A7282;
+    --vxa-grey-600: #4A5565;
+    --vxa-grey-700: #364153;
+    --vxa-grey-800: #1E2939;
+    --vxa-grey-900: #101828;
+    --vxa-grey-950: #030712;
+
+    /*Primary colors*/
+    --vxa-hav-0: #F4F5F6;
+    --vxa-hav-100: #EBF0F2;
+    --vxa-hav-200: #EEF3F6;
+    --vxa-hav-300: #A9B6C1;
+    --vxa-hav-400: #9DB2BF;
+    --vxa-hav-500: #526D82;
 
     /*Base text*/
     font-family: "Fredoka", sans-serif;
@@ -10,6 +30,39 @@
     font-style: normal;
     font-variation-settings:
     "wdth" 100;
+    color: var(--vxa-color-body-text);
+
+    /*Spacing*/
+    --vxa-spacing-1: 4px;
+    --vxa-spacing-1-5: 6px;
+    --vxa-spacing-2: 8px;
+    --vxa-spacing-2-5: 10px;
+    --vxa-spacing-3: 12px;
+    --vxa-spacing-4: 16px;
+    --vxa-spacing-5: 20px;
+    --vxa-spacing-6: 24px;
+    --vxa-spacing-7: 28px;
+    --vxa-spacing-8: 32px;
+    --vxa-spacing-9: 36px;
+    --vxa-spacing-10: 40px;
+    --vxa-spacing-11: 44px;
+    --vxa-spacing-12: 48px;
+    --vxa-spacing-13: 52px;
+
+
+    /*Application*/
+    --vxa-color-body-text: var(--vxa-grey-900);
+
+    /*Colors for NavContainer*/
+    --vxa-color-nav-menu-background: var(--vxa-hav-500);
+    --vxa-color-nav-meny-border: var(--vxa-hav-400);
+
+    /*Lägg till Font sizer, letter spacing, letter height...
+    Lägg till border radius och andra värden... */
+}
+
+body {
+    margin: 0px;
 }
 
 .WebContainer {
@@ -18,7 +71,38 @@
 }
 
 .NavContainer {
-    background-color: var(--color-background-primary);
-    border-right: #000000 1px;
+    background-color: var(--vxa-color-nav-menu-background);
+    border-right: 4px solid var(--vxa-color-nav-meny-border);
     width: 20rem;
+    height: 100vh;
+    padding-bottom: var(--vxa-spacing-13);
+    padding-top: var(--vxa-spacing-13);
+    padding-left: var(--vxa-spacing-4);
+    padding-right: var(--vxa-spacing-4);
+}
+
+input {
+
+    height: var(--vxa-spacing-13);
+    padding-left: var(--vxa-spacing-6);
+    padding-right: var(--vxa-spacing-6);
+    border-radius: 28px;
+    font-size: 16px;
+    line-height: 24;
+    letter-spacing: 0.5px;
+    width: stretch;
+    border-style: none;
+    font-family: "Fredoka", sans-serif;
+    color: var(--vxa-grey-500);
+}
+
+input:focus {
+    /*CONTINUE HERE */
+}
+
+.inputPokemon {
+    background-image: url(/images/search-icon.svg);
+    background-position: right 24px center;
+    background-repeat: no-repeat;
+    background-size: 32px;
 }
