@@ -5,15 +5,15 @@
 @inject PokeApiService PokeApi
 <div class="WebContainer">
     <div class="NavContainer">
-        <input class="inputPokemon" @bind="searchTerm" placeholder="Enter Pokémon name or ID..." />
+        <input class="inputPokemon" @bind="searchTerm" @bind:event="oninput" placeholder="Enter Pokémon name or ID..." />
 
-        <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+        <div class="listContainer">
                 @foreach (var pokemonItem in allPokemon
                     .Where(p => string.IsNullOrWhiteSpace(searchTerm) 
                         || p.Name.Contains(searchTerm.Trim().ToLower()))
                     .OrderBy(p => p.Name))
                     {
-                    <button type="button"
+                    <button type="button" class="pokedexList"
                             @onclick="() => SelectPokemon(pokemonItem.Name)"
                             style="display: block; margin-bottom: 5px;">
                         @pokemonItem.Name
