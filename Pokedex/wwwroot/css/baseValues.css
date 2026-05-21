@@ -22,15 +22,7 @@
     --vxa-hav-400: #9DB2BF;
     --vxa-hav-500: #526D82;
 
-    /*Base text*/
-    font-family: "Fredoka", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    letter-spacing: 0.1px;
-    font-style: normal;
-    font-variation-settings:
-    "wdth" 100;
-    color: var(--vxa-color-body-text);
+    
 
     /*Spacing*/
     --vxa-spacing-1: 4px;
@@ -49,7 +41,6 @@
     --vxa-spacing-12: 48px;
     --vxa-spacing-13: 52px;
 
-
     /*Application*/
     --vxa-color-body-text: var(--vxa-grey-900);
 
@@ -59,10 +50,52 @@
 
     /*Lägg till Font sizer, letter spacing, letter height...
     Lägg till border radius och andra värden... */
+
+    /*Border Rardius */
+    --vxa-border-radius-1: 4px;
+    --vxa-border-radius-1-5: 6px;
+    --vxa-border-radius-2: 8px;
+    --vxa-border-radius-2-5: 10px;
+    --vxa-border-radius-3: 12px;
+    --vxa-border-radius-4: 16px;
+    --vxa-border-radius-5: 20px;
+    --vxa-border-radius-6: 24px;
+    --vxa-border-radius-7: 28px;
+    --vxa-border-radius-8: 32px;
+    --vxa-border-radius-9: 36px;
+    --vxa-border-radius-10: 40px;
+    --vxa-border-radius-11: 44px;
+    --vxa-border-radius-12: 48px;
+    --vxa-border-radius-13: 52px;
+
+    /*Font letter spacing */
+    --vxa-font-letter-spacing-normal: 0px;
+    --vxa-font-letter-spacing-wide: 0,1px;
+    --vxa-font-letter-spacing-wider: 0,25px;
+    --vxa-font-letter-spacing-widest: 0,5px;
+    
+
+    /*Font size */
+    --vxa-font-size-xs: 12px;
+    --vxa-font-size-sm: 14px;
+    --vxa-font-size-md: 16px;
+    --vxa-font-size-lg: 18px;
+    --vxa-font-size-xl: 20px;
+    --vxa-font-size-xxl:24px;
 }
 
 body {
     margin: 0px;
+
+    /*Base text*/
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: var(--vxa-font-letter-spacing-wide);
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+    color: var(--vxa-color-body-text);
 }
 
 .WebContainer {
@@ -74,11 +107,12 @@ body {
     background-color: var(--vxa-color-nav-menu-background);
     border-right: 4px solid var(--vxa-color-nav-meny-border);
     width: 20rem;
-    height: 100vh;
-    padding-bottom: var(--vxa-spacing-13);
+    height: 96vh;
+    /*padding-bottom: var(--vxa-spacing-13);*/
     padding-top: var(--vxa-spacing-13);
     padding-left: var(--vxa-spacing-4);
     padding-right: var(--vxa-spacing-4);
+    position: sticky;
 }
 
 input {
@@ -86,18 +120,20 @@ input {
     height: var(--vxa-spacing-13);
     padding-left: var(--vxa-spacing-6);
     padding-right: var(--vxa-spacing-6);
-    border-radius: 28px;
+    border-radius: var(--vxa-border-radius-7);
     font-size: 16px;
     line-height: 24;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--vxa-font-letter-spacing-widest);
     width: stretch;
     border-style: none;
     font-family: "Fredoka", sans-serif;
     color: var(--vxa-grey-500);
 }
 
-input:focus {
-    /*CONTINUE HERE */
+input:focus , input:focus-visible{
+    border-bottom: 2px solid var(--vxa-hav-400);
+    margin-bottom: -2px;
+    outline-style: none;
 }
 
 .inputPokemon {
@@ -105,4 +141,29 @@ input:focus {
     background-position: right 24px center;
     background-repeat: no-repeat;
     background-size: 32px;
+}
+
+.listContainer {
+    height: 88vh;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.pokedexList {
+    background-color: var(--vxa-grey-0);
+    width: stretch;
+    text-align: left;
+    font-size: var(--vxa-font-size-md);
+    font-family: 'Fredoka';
+    padding-top: var(--vxa-spacing-2);
+    padding-bottom: var(--vxa-spacing-2);
+    padding-left: var(--vxa-spacing-4);
+    padding-right: var(--vxa-spacing-4);
+    margin: 0 !important;
+    border-style: unset;
+}
+
+.pokedexList:hover {
+    background-color: var(--vxa-hav-300);
 }
