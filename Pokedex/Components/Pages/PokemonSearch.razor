@@ -22,19 +22,51 @@
         </div>
     </div>
     <div class=PokemonInfo>
-        <h3>Pokémon Search</h3>
-
-
+        @if (pokemon is null)
+        {
+            <h3>Pokémon Search</h3>
+        }
             @if (isLoading)
             {
                 <p>Loading...</p>
             }
             else if (pokemon is not null)
             {
-                <h4>@pokemon.Name</h4>
-                <p>ID: @pokemon.Id</p>
-                <p>Height: @pokemon.Height</p>
-                <p>Weight: @pokemon.Weight</p>
+                 var englishGenus = species.Genera
+                            .FirstOrDefault(g => g.Language.Name == "en")
+                            ?.Genus;
+
+                <div>
+                    <p>#@pokemon.Id</p>
+                    <h4>@pokemon.Name</h4>
+                   
+
+                            <p>The @englishGenus</p>
+
+
+                    <p>Height: @pokemon.Height</p>
+                    <p>Weight: @pokemon.Weight</p>
+
+                      @if (pokemon.Abilities.Count > 0)
+                        {
+                            <p>Abilities:</p>
+
+                            <ul>
+                                @foreach (var abilitySlot in pokemon.Abilities)
+                                {
+                                    <li>
+                                        @abilitySlot.Ability.Name
+
+                                        @if (abilitySlot.IsHidden)
+                                        {
+                                            <span> - Hidden Ability</span>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        }
+                </div>
+                
 
                 @if (pokemon.Types.Count > 0)
                 {
@@ -65,36 +97,11 @@
                     </ul>
                 }
 
-                @if (pokemon.Abilities.Count > 0)
-                {
-                    <p>Abilities:</p>
-
-                    <ul>
-                        @foreach (var abilitySlot in pokemon.Abilities)
-                        {
-                            <li>
-                                @abilitySlot.Ability.Name
-
-                                @if (abilitySlot.IsHidden)
-                                {
-                                    <span> - Hidden Ability</span>
-                                }
-                            </li>
-                        }
-                    </ul>
-                }
                 
                 @if (species is not null)
                 {
                     <h4>Species Info</h4>
-                    var englishGenus = species.Genera
-                        .FirstOrDefault(g => g.Language.Name == "en")
-                        ?.Genus;
-
-                    if (!string.IsNullOrEmpty(englishGenus))
-                    {
-                        <p>Category: @englishGenus</p>
-                    }
+                    
 
                     var flavorTextEntries = species.FlavorTextEntries
                     .Where(entry => entry.Language.Name == "en")
