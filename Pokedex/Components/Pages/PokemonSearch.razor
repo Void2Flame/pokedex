@@ -3,7 +3,7 @@
 @using Pokedex.Services
 @using Pokedex.PokemonData
 @inject PokeApiService PokeApi
-<div class="WebContainer">
+<div class="WebContainer" style="background-color: @GetPokemonBackgroundColor();">
     <div class="NavContainer">
         <input class="inputPokemon" @bind="searchTerm" @bind:event="oninput"
                placeholder="Enter Pokémon name or ID..." />
@@ -238,4 +238,27 @@
             _ => statName
         };
     }
+
+    private string GetPokemonBackgroundColor()
+{
+    if (species?.Color?.Name is null)
+    {
+        return "#f5f5f5";
+    }
+
+    return species.Color.Name switch
+    {
+        "black" => "#2f2f2f",
+        "blue" => "#7db7f0",
+        "brown" => "#b68b5f",
+        "gray" => "#c0c0c0",
+        "green" => "#8fd694",
+        "pink" => "#f5a6c8",
+        "purple" => "#b28be0",
+        "red" => "#f08080",
+        "white" => "#f7f7f7",
+        "yellow" => "#f5df7e",
+        _ => "#f5f5f5"
+    };
+}
 }

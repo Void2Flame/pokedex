@@ -43,6 +43,7 @@
 
     /*Application*/
     --vxa-color-body-text: var(--vxa-grey-900);
+    --vxa-color-body-background: var(--vxa-grey-0);
 
     /*Colors for NavContainer*/
     --vxa-color-nav-menu-background: var(--vxa-hav-500);
@@ -96,6 +97,7 @@ body {
     font-variation-settings:
     "wdth" 100;
     color: var(--vxa-color-body-text);
+    background-color: var(--vxa-color-body-background);
 }
 
 .WebContainer {
@@ -189,4 +191,11 @@ input:focus , input:focus-visible{
     width: 100%;
     box-sizing: border-box;
     margin-top: var(--vxa-spacing-13);
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 52;
+    letter-spacing: 0px;
+    line-height: 40px;
 }
