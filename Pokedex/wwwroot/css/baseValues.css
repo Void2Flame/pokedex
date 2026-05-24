@@ -148,6 +148,7 @@ input:focus , input:focus-visible{
     overflow-y: auto;
     border: 1px solid #ccc;
     margin-top: 10px;
+    background: var(--vxa-grey-0);
 }
 
 .pokedexList {
@@ -166,4 +167,26 @@ input:focus , input:focus-visible{
 
 .pokedexList:hover {
     background-color: var(--vxa-hav-300);
+}
+
+.pokeIMG {
+    width: 450px
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top:100px;
+    width: 900px;margin: 0 auto;
+    padding: var(--vxa-spacing-12) var(--vxa-spacing-12);
+}
+.firstPokeInfo {
+    display: flex;
+}
+
+.container > * {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: var(--vxa-spacing-13);
 }
