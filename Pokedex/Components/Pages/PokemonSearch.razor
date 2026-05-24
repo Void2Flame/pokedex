@@ -5,144 +5,158 @@
 @inject PokeApiService PokeApi
 <div class="WebContainer">
     <div class="NavContainer">
-        <input class="inputPokemon" @bind="searchTerm" @bind:event="oninput" placeholder="Enter Pokémon name or ID..." />
+        <input class="inputPokemon" @bind="searchTerm" @bind:event="oninput"
+               placeholder="Enter Pokémon name or ID..." />
 
         <div class="listContainer">
-                @foreach (var pokemonItem in allPokemon
-                    .Where(p => string.IsNullOrWhiteSpace(searchTerm) 
-                        || p.Name.Contains(searchTerm.Trim().ToLower()))
-                    .OrderBy(p => p.Name))
-                    {
-                    <button type="button" class="pokedexList"
-                            @onclick="() => SelectPokemon(pokemonItem.Name)"
-                            style="display: block; margin-bottom: 5px;">
-                        @pokemonItem.Name
-                    </button>
-                }
+            @foreach (var pokemonItem in allPokemon
+                .Where(p => string.IsNullOrWhiteSpace(searchTerm)
+                    || p.Name.Contains(searchTerm.Trim().ToLower()))
+                .OrderBy(p => p.Name))
+            {
+                <button type="button" class="pokedexList" @onclick="() => SelectPokemon(pokemonItem.Name)"
+                        style="display: block; margin-bottom: 5px;">
+                    @pokemonItem.Name
+                </button>
+            }
         </div>
     </div>
-    <div class=PokemonInfo>
-        <h3>Pokémon Search</h3>
+    <div class=container>
+        @if (pokemon is null)
+        {
+            <h3>Pokémon Search</h3>
+        }
+        @if (isLoading)
+        {
+            <p>Loading...</p>
+        }
+        else if (pokemon is not null)
+        {
+            var englishGenus = species.Genera
+                       .FirstOrDefault(g => g.Language.Name == "en")
+                       ?.Genus;
+
+            <div class="firstPokeInfo">
+                <div>
+                    <p>#@pokemon.Id</p>
+                    <h1>@pokemon.Name</h1>
+
+                   
+                    <p>The @englishGenus</p>
 
 
-            @if (isLoading)
-            {
-                <p>Loading...</p>
-            }
-            else if (pokemon is not null)
-            {
-                <h4>@pokemon.Name</h4>
-                <p>ID: @pokemon.Id</p>
-                <p>Height: @pokemon.Height</p>
-                <p>Weight: @pokemon.Weight</p>
+                    <p>Height: @pokemon.Height</p>
+                    <p>Weight: @pokemon.Weight</p>
 
-                @if (pokemon.Types.Count > 0)
-                {
-                    <p>Types:</p>
-
-                    <div>
-                        @foreach (var typeSlot in pokemon.Types)
-                        {
-                            <span style="margin-right: 8px; padding: 4px 8px; border: 1px solid black; border-radius: 8px;">
-                                @typeSlot.Type.Name
-                            </span>
-                        }
-                    </div>
-                }
-
-
-                @if (pokemon.Stats.Count > 0)
-                {
-                    <h4>Stats</h4>
-
-                    <ul>
-                        @foreach (var statSlot in pokemon.Stats)
-                        {
-                            <li>
-                                @FormatStatName(statSlot.Stat.Name): @statSlot.BaseStat
-                            </li>
-                        }
-                    </ul>
-                }
-
-                @if (pokemon.Abilities.Count > 0)
-                {
-                    <p>Abilities:</p>
-
-                    <ul>
-                        @foreach (var abilitySlot in pokemon.Abilities)
-                        {
-                            <li>
-                                @abilitySlot.Ability.Name
-
-                                @if (abilitySlot.IsHidden)
-                                {
-                                    <span> - Hidden Ability</span>
-                                }
-                            </li>
-                        }
-                    </ul>
-                }
-                
-                @if (species is not null)
-                {
-                    <h4>Species Info</h4>
-                    var englishGenus = species.Genera
-                        .FirstOrDefault(g => g.Language.Name == "en")
-                        ?.Genus;
-
-                    if (!string.IsNullOrEmpty(englishGenus))
+                    @if (pokemon.Abilities.Count > 0)
                     {
-                        <p>Category: @englishGenus</p>
-                    }
-
-                    var flavorTextEntries = species.FlavorTextEntries
-                    .Where(entry => entry.Language.Name == "en")
-                    .Select(entry => entry.FlavorText
-                    .Replace("\n", " ")
-                    .Replace("\f", " "))
-                    .Distinct()
-                    .Take(4)
-                    .ToList();
-
-                    if (flavorTextEntries.Count > 0)
-                    {
-                        <h4>Pokédex Descriptions</h4>
+                        <p>Abilities:</p>
 
                         <ul>
-                        @foreach (var entry in flavorTextEntries)
-                        {
-                            <li>@entry</li>
-                        }
+                            @foreach (var abilitySlot in pokemon.Abilities)
+                            {
+                                <li>
+                                    @abilitySlot.Ability.Name
+
+                                    @if (abilitySlot.IsHidden)
+                                    {
+                                        <span> - Hidden Ability</span>
+                                    }
+                                </li>
+                            }
                         </ul>
                     }
-                }
+                </div>
 
-                @if (!string.IsNullOrEmpty(pokemon.Sprites.FrontDefault))
-                {
-                    <img src="@pokemon.Sprites.Other.OfficialArtwork.FrontDefault" alt="@pokemon.Name" style="width: 250px" />
-                }
+                <div>
+                    @if (!string.IsNullOrEmpty(pokemon.Sprites.FrontDefault))
+                    {
+                        <img class="pokeIMG" src="@pokemon.Sprites.Other.OfficialArtwork.FrontDefault" alt="@pokemon.Name" />
+                    }
+                </div>
+                <div>
+                    @if (pokemon.Types.Count > 0)
+                    {
+                        <div>
+                            @foreach (var typeSlot in pokemon.Types)
+                            {
+                                <span style="margin-right: 8px; padding: 4px 8px; border: 1px solid black; border-radius: 8px;">
+                                    @typeSlot.Type.Name
+                                </span>
+                            }
+                        </div>
+                    }
+                    <h1>Base stats:</h1>
+                    @if (pokemon.Stats.Count > 0)
+                    {
+                        <div>
+                            <ul>
+                                @foreach (var statSlot in pokemon.Stats)
+                                {
+                                    <li>
+                                        @FormatStatName(statSlot.Stat.Name): @statSlot.BaseStat
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
 
-                @if (evolutionNames.Count > 0)
+
+                
+            @if (species is not null)
+            {
+
+                    
+                var flavorTextEntries = species.FlavorTextEntries
+                                    .Where(entry => entry.Language.Name == "en")
+                                    .Select(entry => entry.FlavorText
+                                    .Replace("\n", " ")
+                                    .Replace("\f", " "))
+                                    .Distinct()
+                                    .Take(4)
+                                    .ToList();
+
+                if (flavorTextEntries.Count > 0)
                 {
-                    <h4>Evolution Chain</h4>
+                    <div>
+                        <h1>Pokédex Entress</h1>
+
+                        <ul>
+                            @foreach (var entry in flavorTextEntries)
+                            {
+                                <li>@entry</li>
+                            }
+                        </ul>
+                    </div>
+
+                }
+            }
+
+            @if (evolutionNames.Count > 0)
+            {
+                <div>
+                    <h1>Evolutions</h1>
                     <ul>
                         @foreach (var evolutionName in evolutionNames)
                         {
                             <li>@evolutionName</li>
                         }
                     </ul>
-                }
+                </div>
+                
             }
-            else if (hasSearched)
-            {
-                <p>No Pokémon found.</p>
-            }
+        }
+        else if (hasSearched)
+        {
+            <p>No Pokémon found.</p>
+        }
     </div>
 </div>
 
 
-@code 
+@code
 {
     private string searchTerm;
     private Pokemon? pokemon;
@@ -182,7 +196,7 @@
             {
                 var EvolutionChain = await PokeApi.GetEvolutionChainAsync(species.EvolutionChain.Url);
 
-                if(EvolutionChain is not null)
+                if (EvolutionChain is not null)
                 {
                     evolutionNames = GetEvolutionNames(EvolutionChain.Chain);
                 }
@@ -221,7 +235,7 @@
             "special-attack" => "Special Attack",
             "special-defense" => "Special Defense",
             "speed" => "Speed",
-            _   => statName
+            _ => statName
         };
     }
 }
