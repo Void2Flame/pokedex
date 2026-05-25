@@ -127,6 +127,7 @@ li.badge {
     color: var(--vxa-color-badge-text);
     list-style: none;
     width: fit-content;
+    margin-bottom: var(--vxa-spacing-2);
 
 }
 
@@ -137,7 +138,9 @@ ul
 
 
 .pokeAbiltiesAndInfo > * {
+    margin: 0;
     margin-bottom: var(--vxa-spacing-6);
+
 }
 
 .pokeHeightAndWeight > *  {

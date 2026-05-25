@@ -37,7 +37,7 @@
                        ?.Genus;
 
             <div class="firstPokeInfo">
-                <div>
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
                     <div class="pokeAbiltiesAndInfo">
                         <p>#@pokemon.Id</p>
                         <h1>@pokemon.Name</h1>
@@ -99,7 +99,7 @@
                             <ul>
                                 @foreach (var statSlot in pokemon.Stats)
                                 {
-                                    <li>
+                                    <li class="badge">
                                         @FormatStatName(statSlot.Stat.Name): @statSlot.BaseStat
                                     </li>
                                 }
