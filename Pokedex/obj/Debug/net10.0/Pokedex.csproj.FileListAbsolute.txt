@@ -37,6 +37,6 @@ e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\Pokedex.genruntimeconfig.cache
 e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\ref\Pokedex.dll
 e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\tctzk4axej-{0}-h8m34aohdh-h8m34aohdh.gz
 e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\4e32e95fjs-{0}-h8m34aohdh-h8m34aohdh.gz
-e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\6k8khvlmqf-{0}-5ipweew5fc-5ipweew5fc.gz
 e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\506wlefidc-{0}-lihpt0pqin-lihpt0pqin.gz
-e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\yrtnuyjd65-{0}-86xj6kpg9s-86xj6kpg9s.gz
+e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\6k8khvlmqf-{0}-6qv4fdbak4-6qv4fdbak4.gz
+e:\Dev\pokedex\Pokedex\obj\Debug\net10.0\compressed\yrtnuyjd65-{0}-oeonp8uop1-oeonp8uop1.gz

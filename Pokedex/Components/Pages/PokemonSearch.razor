@@ -24,7 +24,7 @@
     <div class=container>
         @if (pokemon is null)
         {
-            <h3>Pokémon Search</h3>
+            <h3 style="color: #101828;">Pokémon Search</h3>
         }
         @if (isLoading)
         {
@@ -38,33 +38,39 @@
 
             <div class="firstPokeInfo">
                 <div>
-                    <p>#@pokemon.Id</p>
-                    <h1>@pokemon.Name</h1>
+                    <div class="pokeAbiltiesAndInfo">
+                        <p>#@pokemon.Id</p>
+                        <h1>@pokemon.Name</h1>
 
                    
-                    <p>The @englishGenus</p>
+                        <p>The @englishGenus</p>
 
+                        <div class="pokeHeightAndWeight">
+                            <p>Height: @pokemon.Height</p>
+                            <p>Weight: @pokemon.Weight</p>
+                        </div>
 
-                    <p>Height: @pokemon.Height</p>
-                    <p>Weight: @pokemon.Weight</p>
-
+                    </div>
                     @if (pokemon.Abilities.Count > 0)
                     {
-                        <p>Abilities:</p>
+                        <div>
+                            <p>Abilities:</p>
 
-                        <ul>
-                            @foreach (var abilitySlot in pokemon.Abilities)
-                            {
-                                <li>
-                                    @abilitySlot.Ability.Name
+                            <ul style="border-style: none; padding-left: 0px;">
+                                @foreach (var abilitySlot in pokemon.Abilities)
+                                {
+                                    <li class="badge">
+                                        @abilitySlot.Ability.Name
 
-                                    @if (abilitySlot.IsHidden)
-                                    {
-                                        <span> - Hidden Ability</span>
-                                    }
-                                </li>
-                            }
-                        </ul>
+                                        @if (abilitySlot.IsHidden)
+                                        {
+                                            <span> - Hidden Ability</span>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
                     }
                 </div>
 
@@ -150,7 +156,7 @@
         }
         else if (hasSearched)
         {
-            <p>No Pokémon found.</p>
+            <p style="color: #101828;">No Pokémon found.</p>
         }
     </div>
 </div>
@@ -243,21 +249,21 @@
 {
     if (species?.Color?.Name is null)
     {
-        return "#f5f5f5";
+        return "#F9FAFB";
     }
 
     return species.Color.Name switch
     {
-        "black" => "#2f2f2f",
-        "blue" => "#7db7f0",
-        "brown" => "#b68b5f",
-        "gray" => "#c0c0c0",
-        "green" => "#8fd694",
-        "pink" => "#f5a6c8",
-        "purple" => "#b28be0",
-        "red" => "#f08080",
-        "white" => "#f7f7f7",
-        "yellow" => "#f5df7e",
+        "black" => "#353535",
+        "blue" => "#1A4885",
+        "brown" => "#9C7551",
+        "gray" => "#A3A3A3",
+        "green" => "#32752B",
+        "pink" => "#7D004D",
+        "purple" => "#551B51",
+        "red" => "#691618",
+        "white" => "#A3A3A3",
+        "yellow" => "#8A7500",
         _ => "#f5f5f5"
     };
 }

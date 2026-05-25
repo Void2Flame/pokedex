@@ -1,26 +1,74 @@
 :root
 {
 
-    /*Base color to black*/
-    --vxa-grey-0: #F9FAFB;
-    --vxa-grey-100: #F3F4F6;
-    --vxa-grey-200: #E5E7EB;
-    --vxa-grey-300: #D1D5DC;
-    --vxa-grey-400: #99A1AF;
-    --vxa-grey-500: #6A7282;
-    --vxa-grey-600: #4A5565;
-    --vxa-grey-700: #364153;
-    --vxa-grey-800: #1E2939;
-    --vxa-grey-900: #101828;
-    --vxa-grey-950: #030712;
+--vxa-hav-150: #002026;
+    --vxa-hav-125: #00303A;
+    --vxa-hav-100: #00404D;
+    --vxa-hav-50: #7f9fa5;
+    --vxa-hav-30: #b3ccd0;
+    --vxa-hav-25: #bfcfd2;
+    --vxa-hav-15: #e7edee;
+    --vxa-hav-10: #f7f9fa;
+    --vxa-hav-5: #f9fcfc;
 
-    /*Primary colors*/
-    --vxa-hav-0: #F4F5F6;
-    --vxa-hav-100: #EBF0F2;
-    --vxa-hav-200: #EEF3F6;
-    --vxa-hav-300: #A9B6C1;
-    --vxa-hav-400: #9DB2BF;
-    --vxa-hav-500: #526D82;
+    /*Horisont*/
+    --vxa-horisont-100: #006b85;
+    --vxa-horisont-50: #7fb4c1;
+    --vxa-horisont-30: #B3D3DB;
+    --vxa-horisont-25: #bfdae0;
+    --vxa-horisont-15: #d9e9ed;
+    --vxa-horisont-10: #e6f1f3;
+    --vxa-horisont-5: #F2F7F9;
+
+    /*Marin*/
+    --vxa-marin-100: #054257;
+    --vxa-marin-50: #82A1AB;
+    --vxa-marin-30: #b4c7cd;
+    --vxa-marin-25: #c0cfd5;
+    --vxa-marin-15: #DAE3E6;
+    --vxa-marin-10: #E6EDEF;
+    --vxa-marin-5: #F2F5F6;
+
+    /*Mossa*/
+    --vxa-mossa-150: #23403A;
+    --vxa-mossa-125: #356058;
+    --vxa-mossa-100: #478075;
+    --vxa-mossa-50: #7F9FA5;
+    --vxa-mossa-30: #C8D9D6;
+    --vxa-mossa-25: #D1DFDC;
+    --vxa-mossa-15: #E4ECEA;
+    --vxa-mossa-10: #EDF3F2;
+    --vxa-mossa-5: #F6F8F8;
+
+    /*Vind*/
+    --vxa-vind-100: #66BFB5;
+    --vxa-vind-50: #B2DED9;
+    --vxa-vind-30: #d2ece9;
+    --vxa-vind-25: #D8EFEC;
+    --vxa-vind-15: #E8F6F4;
+    --vxa-vind-10: #F0F9F8;
+    --vxa-vind-5: #F7FCFB;
+
+    /*Berg*/
+    --vxa-berg-100: #575757;
+    --vxa-berg-50: #ABABAB;
+    --vxa-berg-30: #CDCDCD;
+    --vxa-berg-25: #D5D5D5;
+    --vxa-berg-15: #E6E6E6;
+    --vxa-berg-10: #EFEFEF;
+    --vxa-berg-5: #F6F6F6;
+
+    /*Kalk*/
+    --vxa-kalk-100: #EDEDED;
+    --vxa-kalk-50: #F6F6F6;
+    --vxa-kalk-30: #FAFAFA;
+    --vxa-kalk-25: #FAFAFA;
+    --vxa-kalk-15: #FDFDFD;
+    --vxa-kalk-5: #FEFEFE;
+
+    /*Svart & Vitt*/
+    --vxa-svart-100: #212529;
+    --vxa-vitt-100: #ffffff;
 
     
 
@@ -41,13 +89,6 @@
     --vxa-spacing-12: 48px;
     --vxa-spacing-13: 52px;
 
-    /*Application*/
-    --vxa-color-body-text: var(--vxa-grey-900);
-    --vxa-color-body-background: var(--vxa-grey-0);
-
-    /*Colors for NavContainer*/
-    --vxa-color-nav-menu-background: var(--vxa-hav-500);
-    --vxa-color-nav-meny-border: var(--vxa-hav-400);
 
     /*Lägg till Font sizer, letter spacing, letter height...
     Lägg till border radius och andra värden... */
@@ -85,117 +126,40 @@
     --vxa-font-size-xxl:24px;
 }
 
-body {
-    margin: 0px;
+/*Detta är kopplade färger till färgsystemet*/
+/*Lägg data-theme="[name]" i html taggen för att kunna ändra olika teman*/
+[data-theme="user"] {
 
-    /*Base text*/
-    font-family: "Fredoka", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    letter-spacing: var(--vxa-font-letter-spacing-wide);
-    font-style: normal;
-    font-variation-settings:
-    "wdth" 100;
-    color: var(--vxa-color-body-text);
-    background-color: var(--vxa-color-body-background);
+    /*Meny färger*/
+    --vxa-color-nav-menu-background: var(--vxa-hav-30);
+    --vxa-color-nav-meny-border: var(--vxa-hav-50);
+    --vxa-color-nav-menu-text: var(--vxa-svart-100);
+
+        /*Application*/
+    --vxa-color-body-text: var(--vxa-vitt-100);
+    --vxa-color-body-background: var(--vxa-vitt-100);
+
+    /*Badges färger*/
+    --vxa-color-badge-border: var(--vxa-berg-50);
+    --vxa-color-badge-background: var(--vxa-vitt-100);
+    --vxa-color-badge-text: var(--vxa-svart-100);
+
 }
 
-.WebContainer {
-    display: flex;
-    flex-direction: row;
+[data-theme="admin"] {
+    /*Komponenter färger*/
+       /*Meny färger*/
+    --vxa-color-nav-menu-background: var(--vxa-mossa-30);
+    --vxa-color-nav-meny-border: var(--vxa-mossa-50);
+    --vxa-color-nav-menu-text: var(--vxa-svart-100);
+
+        /*Application*/
+    --vxa-color-body-text: var(--vxa-vitt-100);
+    --vxa-color-body-background: var(--vxa-vitt-100);
+
+    /*Badges färger*/
+    --vxa-color-badge-border: var(--vxa-berg-50);
+    --vxa-color-badge-background: var(--vxa-vitt-100);
+    --vxa-color-badge-text: var(--vxa-svart-100);
 }
 
-.NavContainer {
-    background-color: var(--vxa-color-nav-menu-background);
-    border-right: 4px solid var(--vxa-color-nav-meny-border);
-    width: 20rem;
-    height: 96vh;
-    /*padding-bottom: var(--vxa-spacing-13);*/
-    padding-top: var(--vxa-spacing-13);
-    padding-left: var(--vxa-spacing-4);
-    padding-right: var(--vxa-spacing-4);
-    position: sticky;
-}
-
-input {
-
-    height: var(--vxa-spacing-13);
-    padding-left: var(--vxa-spacing-6);
-    padding-right: var(--vxa-spacing-6);
-    border-radius: var(--vxa-border-radius-7);
-    font-size: 16px;
-    line-height: 24;
-    letter-spacing: var(--vxa-font-letter-spacing-widest);
-    width: stretch;
-    border-style: none;
-    font-family: "Fredoka", sans-serif;
-    color: var(--vxa-grey-500);
-}
-
-input:focus , input:focus-visible{
-    border-bottom: 2px solid var(--vxa-hav-400);
-    margin-bottom: -2px;
-    outline-style: none;
-}
-
-.inputPokemon {
-    background-image: url(/images/search-icon.svg);
-    background-position: right 24px center;
-    background-repeat: no-repeat;
-    background-size: 32px;
-}
-
-.listContainer {
-    height: 88vh;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    background: var(--vxa-grey-0);
-}
-
-.pokedexList {
-    background-color: var(--vxa-grey-0);
-    width: stretch;
-    text-align: left;
-    font-size: var(--vxa-font-size-md);
-    font-family: 'Fredoka';
-    padding-top: var(--vxa-spacing-2);
-    padding-bottom: var(--vxa-spacing-2);
-    padding-left: var(--vxa-spacing-4);
-    padding-right: var(--vxa-spacing-4);
-    margin: 0 !important;
-    border-style: unset;
-}
-
-.pokedexList:hover {
-    background-color: var(--vxa-hav-300);
-}
-
-.pokeIMG {
-    width: 450px
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-top:100px;
-    width: 900px;margin: 0 auto;
-    padding: var(--vxa-spacing-12) var(--vxa-spacing-12);
-}
-.firstPokeInfo {
-    display: flex;
-}
-
-.container > * {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: var(--vxa-spacing-13);
-}
-
-h1 {
-    font-weight: 600;
-    font-size: 52;
-    letter-spacing: 0px;
-    line-height: 40px;
-}
