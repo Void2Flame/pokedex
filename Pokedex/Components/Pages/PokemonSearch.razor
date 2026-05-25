@@ -3,7 +3,7 @@
 @using Pokedex.Services
 @using Pokedex.PokemonData
 @inject PokeApiService PokeApi
-<div class="WebContainer">
+<div class="WebContainer" style="background-color: @GetPokemonBackgroundColor();">
     <div class="NavContainer">
         <input class="inputPokemon" @bind="searchTerm" @bind:event="oninput"
                placeholder="Enter Pokémon name or ID..." />
@@ -24,7 +24,7 @@
     <div class=container>
         @if (pokemon is null)
         {
-            <h3>Pokémon Search</h3>
+            <h3 style="color: #101828;">Pokémon Search</h3>
         }
         @if (isLoading)
         {
@@ -37,34 +37,40 @@
                        ?.Genus;
 
             <div class="firstPokeInfo">
-                <div>
-                    <p>#@pokemon.Id</p>
-                    <h1>@pokemon.Name</h1>
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="pokeAbiltiesAndInfo">
+                        <p>#@pokemon.Id</p>
+                        <h1>@pokemon.Name</h1>
 
                    
-                    <p>The @englishGenus</p>
+                        <p>The @englishGenus</p>
 
+                        <div class="pokeHeightAndWeight">
+                            <p>Height: @pokemon.Height</p>
+                            <p>Weight: @pokemon.Weight</p>
+                        </div>
 
-                    <p>Height: @pokemon.Height</p>
-                    <p>Weight: @pokemon.Weight</p>
-
+                    </div>
                     @if (pokemon.Abilities.Count > 0)
                     {
-                        <p>Abilities:</p>
+                        <div>
+                            <p>Abilities:</p>
 
-                        <ul>
-                            @foreach (var abilitySlot in pokemon.Abilities)
-                            {
-                                <li>
-                                    @abilitySlot.Ability.Name
+                            <ul style="border-style: none; padding-left: 0px;">
+                                @foreach (var abilitySlot in pokemon.Abilities)
+                                {
+                                    <li class="badge">
+                                        @abilitySlot.Ability.Name
 
-                                    @if (abilitySlot.IsHidden)
-                                    {
-                                        <span> - Hidden Ability</span>
-                                    }
-                                </li>
-                            }
-                        </ul>
+                                        @if (abilitySlot.IsHidden)
+                                        {
+                                            <span> - Hidden Ability</span>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
                     }
                 </div>
 
@@ -93,7 +99,7 @@
                             <ul>
                                 @foreach (var statSlot in pokemon.Stats)
                                 {
-                                    <li>
+                                    <li class="badge">
                                         @FormatStatName(statSlot.Stat.Name): @statSlot.BaseStat
                                     </li>
                                 }
@@ -150,7 +156,7 @@
         }
         else if (hasSearched)
         {
-            <p>No Pokémon found.</p>
+            <p style="color: #101828;">No Pokémon found.</p>
         }
     </div>
 </div>
@@ -238,4 +244,27 @@
             _ => statName
         };
     }
+
+    private string GetPokemonBackgroundColor()
+{
+    if (species?.Color?.Name is null)
+    {
+        return "#F9FAFB";
+    }
+
+    return species.Color.Name switch
+    {
+        "black" => "#353535",
+        "blue" => "#1A4885",
+        "brown" => "#9C7551",
+        "gray" => "#A3A3A3",
+        "green" => "#32752B",
+        "pink" => "#7D004D",
+        "purple" => "#551B51",
+        "red" => "#691618",
+        "white" => "#A3A3A3",
+        "yellow" => "#8A7500",
+        _ => "#f5f5f5"
+    };
+}
 }
