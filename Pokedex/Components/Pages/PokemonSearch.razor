@@ -16,7 +16,7 @@
             {
                 <button type="button" class="pokedexList" @onclick="() => SelectPokemon(pokemonItem.Name)"
                         style="display: block; margin-bottom: 5px;">
-                    @pokemonItem.Name
+                    @FirstLetterToUpper(pokemonItem.Name)
                 </button>
             }
         </div>
@@ -128,7 +128,7 @@
                 if (flavorTextEntries.Count > 0)
                 {
                     <div>
-                        <h1>Pokédex Entress</h1>
+                        <h1>Pokédex Entries</h1>
 
                         <ul>
                             @foreach (var entry in flavorTextEntries)
@@ -193,7 +193,7 @@
 
     private async Task SelectPokemon(string PokemonName)
     {
-        searchTerm = PokemonName;
+        searchTerm = FirstLetterToUpper(PokemonName);
         await SearchPokemon();
     }
 
@@ -211,6 +211,11 @@
             species = await PokeApi.GetPokemonSpeciesAsync(searchTerm);
 
             pokemon.Name=FirstLetterToUpper(pokemon.Name);
+
+            for (int i=0; i<pokemon.Abilities.Count; i++)
+            {
+                pokemon.Abilities[i].Ability.Name = FirstLetterToUpper(pokemon.Abilities[i].Ability.Name);
+            }
 
             if (species is not null && !string.IsNullOrEmpty(species.EvolutionChain.Url))
             {
@@ -232,7 +237,7 @@
 
                                 evolutionPicture.Add(new EvolutionDisplayItem
                                 {
-                                    Name = evoltuionPokemon.Name,
+                                    Name = FirstLetterToUpper(evoltuionPokemon.Name),
                                     ImageUrl = imageUrl
                                 });
                             }
