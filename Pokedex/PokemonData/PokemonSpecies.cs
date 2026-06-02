@@ -17,6 +17,8 @@ public class PokemonSpecies
 
     [JsonPropertyName("genera")]
     public List<PokemonGenus> Genera { get; set; } = new();
+
+    public PokemonSpeciesInfo Color { get; set; } = new();
 }
 
 

@@ -1,0 +1,197 @@
+body {
+    margin: 0px;
+
+    /*Base text*/
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: var(--vxa-font-letter-spacing-wide);
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+    color: var(--vxa-color-body-text);
+    background-color: var(--vxa-color-body-background);
+}
+
+.WebContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.NavContainer {
+    background-color: var(--vxa-color-nav-menu-background);
+    border-right: 4px solid var(--vxa-color-nav-meny-border);
+    width: 20rem;
+    height: 96vh;
+    /*padding-bottom: var(--vxa-spacing-13);*/
+    padding-top: var(--vxa-spacing-13);
+    padding-left: var(--vxa-spacing-4);
+    padding-right: var(--vxa-spacing-4);
+    position: sticky;
+    color: var( --vxa-color-nav-menu-text);
+}
+
+input {
+
+    height: var(--vxa-spacing-13);
+    padding-left: var(--vxa-spacing-6);
+    padding-right: var(--vxa-spacing-6);
+    border-radius: var(--vxa-border-radius-7);
+    font-size: 16px;
+    line-height: 24;
+    letter-spacing: var(--vxa-font-letter-spacing-widest);
+    width: stretch;
+    border-style: none;
+    font-family: "Fredoka", sans-serif;
+    color: var(--vxa-grey-500);
+}
+
+input:focus , input:focus-visible{
+    border-bottom: 2px solid var(--vxa-hav-400);
+    margin-bottom: -2px;
+    outline-style: none;
+}
+
+.inputPokemon {
+    background-image: url(/images/search-icon.svg);
+    background-position: right 24px center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+}
+
+.listContainer {
+    height: 88vh;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background: var(--vxa-vitt-100);
+}
+
+.pokedexList {
+    background-color: var(--vxa-vitt-100);
+    width: stretch;
+    text-align: left;
+    font-size: var(--vxa-font-size-md);
+    font-family: 'Fredoka';
+    padding-top: var(--vxa-spacing-2);
+    padding-bottom: var(--vxa-spacing-2);
+    padding-left: var(--vxa-spacing-4);
+    padding-right: var(--vxa-spacing-4);
+    margin: 0 !important;
+    border-style: unset;
+}
+
+.pokedexList:hover {
+    background-color: var(--vxa-horisont-50);
+}
+
+.pokeIMG {
+    width: 450px
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top:100px;
+    width: 900px;margin: 0 auto;
+    padding: var(--vxa-spacing-12) var(--vxa-spacing-12);
+    color: var(--vxa-color-body-text);
+}
+.firstPokeInfo {
+    display: flex;
+}
+
+.container > * {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: var(--vxa-spacing-13);
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 52px;
+    letter-spacing: 0px;
+    line-height: 40px;
+}
+
+ul {
+    border-left: 4px solid #ffffff80;
+}
+
+li.badge {
+    padding: var(--vxa-spacing-2-5) var(--vxa-spacing-5);
+    border-radius: var(--vxa-border-radius-2);
+    border: 1px solid var(--vxa-color-badge-border);
+    background: var(--vxa-color-badge-background);
+    color: var(--vxa-color-badge-text);
+    list-style: none;
+    width: fit-content;
+    margin-bottom: var(--vxa-spacing-2);
+
+}
+
+ul
+{
+    padding-left: var(--vxa-spacing-8)
+}
+
+
+.pokeAbiltiesAndInfo > * {
+    margin: 0;
+    margin-bottom: var(--vxa-spacing-6);
+
+}
+
+.pokeHeightAndWeight > *  {
+    margin: 0px;
+}
+
+
+.pokeTypes {
+    display: flex;
+    gap: var(--vxa-spacing-8);
+    height: 100px;
+}
+
+.pokeTypes div {
+        height: 100px;
+    background-color: var(--vxa-color-type-background);
+    border: 1px solid var(--vxa-color-type-border);
+    width: 100px;
+    border-radius: var(--vxa-border-radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokeTypes div img {
+    height: 75%;
+    border-radius: var(--vxa-border-radius-full);
+}
+
+.evolutionContainer {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.evolutionCard {
+    text-align: center;
+    background-color: var(--vxa-color-evolution-background);
+    border: 1px solid var(--vxa-color-evolution-border);
+    width: 240px;
+    height: 240px;
+    border-radius: var(--vxa-border-radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.evolutionImage {
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+}
