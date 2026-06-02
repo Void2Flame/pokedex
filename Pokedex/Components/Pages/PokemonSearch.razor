@@ -192,6 +192,8 @@
             pokemon = await PokeApi.GetPokemonAsync(searchTerm);
             species = await PokeApi.GetPokemonSpeciesAsync(searchTerm);
 
+            pokemon.Name=FirstLetterToUpper(pokemon.Name);
+
             if (species is not null && !string.IsNullOrEmpty(species.EvolutionChain.Url))
             {
                 var EvolutionChain = await PokeApi.GetEvolutionChainAsync(species.EvolutionChain.Url);
