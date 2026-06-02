@@ -146,3 +146,25 @@ ul
 .pokeHeightAndWeight > *  {
     margin: 0px;
 }
+
+
+.pokeTypes {
+    display: flex;
+    gap: 32px;
+    height: 100px;
+}
+
+.pokeTypes div {
+        height: 100px;
+    background-color: white;
+    width: 100px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokeTypes div img {
+    height: 75%;
+    border-radius: 9999px;
+}

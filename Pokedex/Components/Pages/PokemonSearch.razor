@@ -83,12 +83,13 @@
                 <div>
                     @if (pokemon.Types.Count > 0)
                     {
-                        <div>
+                        <div class="pokeTypes">
                             @foreach (var typeSlot in pokemon.Types)
                             {
-                                <span style="margin-right: 8px; padding: 4px 8px; border: 1px solid black; border-radius: 8px;">
-                                    @typeSlot.Type.Name
-                                </span>
+                                <div>
+                                    <img src="@($"images/{typeSlot.Type.Name}.png")"/>
+                                </div>
+                                    
                             }
                         </div>
                     }
