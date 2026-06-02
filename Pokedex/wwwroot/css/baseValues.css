@@ -109,6 +109,7 @@
     --vxa-border-radius-11: 44px;
     --vxa-border-radius-12: 48px;
     --vxa-border-radius-13: 52px;
+    --vxa-border-radius-full:9999px;
 
     /*Font letter spacing */
     --vxa-font-letter-spacing-normal: 0px;
@@ -144,6 +145,16 @@
     --vxa-color-badge-background: var(--vxa-vitt-100);
     --vxa-color-badge-text: var(--vxa-svart-100);
 
+    /*Pokemon type färger*/
+    --vxa-color-type-background: var(--vxa-vitt-100);
+    --vxa-color-type-border: var(--vxa-berg-50);
+
+    /*Pokemon evolution färger*/
+    --vxa-color-evolution-background: var(--vxa-vitt-100);
+    --vxa-color-evolution-border: var(--vxa-berg-50);
+
+
+
 }
 
 [data-theme="admin"] {
@@ -161,5 +172,13 @@
     --vxa-color-badge-border: var(--vxa-berg-50);
     --vxa-color-badge-background: var(--vxa-vitt-100);
     --vxa-color-badge-text: var(--vxa-svart-100);
+
+        /*Pokemon type färger*/
+    --vxa-color-type-background: var(--vxa-vitt-100);
+    --vxa-color-type-border: var(--vxa-berg-100);
+
+    /*Pokemon evolution färger*/
+    --vxa-color-evolution-background: var(--vxa-vitt-100);
+    --vxa-color-evolution-border: var(--vxa-berg-100);
 }
 

@@ -83,12 +83,13 @@
                 <div>
                     @if (pokemon.Types.Count > 0)
                     {
-                        <div>
+                        <div class="pokeTypes">
                             @foreach (var typeSlot in pokemon.Types)
                             {
-                                <span style="margin-right: 8px; padding: 4px 8px; border: 1px solid black; border-radius: 8px;">
-                                    @typeSlot.Type.Name
-                                </span>
+                                <div>
+                                    <img src="@($"images/{typeSlot.Type.Name}.png")"/>
+                                </div>
+                                    
                             }
                         </div>
                     }
@@ -144,14 +145,23 @@
             {
                 <div>
                     <h1>Evolutions</h1>
-                    <ul>
-                        @foreach (var evolutionName in evolutionNames)
+                    <div class="evolutionContainer">
+                        @foreach (var evolution in evolutionPicture)
                         {
-                            <li>@evolutionName</li>
+                            <div style="text-align: center; font-size: 32px">
+                                <div class="evolutionCard">
+                                    @if (!string.IsNullOrEmpty(evolution.ImageUrl))
+                                    {
+                                        <img src="@evolution.ImageUrl" alt="@evolution.Name" class="evolutionImage" />
+                                    }
+                                </div>
+                                <p>@evolution.Name</p>
+                            </div>
                         }
-                    </ul>
+                    </div>
+
                 </div>
-                
+
             }
         }
         else if (hasSearched)
@@ -170,6 +180,8 @@
     private bool hasSearched = false;
     private PokemonSpecies? species;
     private List<string> evolutionNames = new();
+
+    private List<EvolutionDisplayItem> evolutionPicture = new ();
 
     private List<PokemonListItem> allPokemon = new();
     private string pokemonListFilter = "";
@@ -205,6 +217,25 @@
                 if (EvolutionChain is not null)
                 {
                     evolutionNames = GetEvolutionNames(EvolutionChain.Chain);
+                    evolutionPicture.Clear();
+
+                    foreach(var evolutionName in evolutionNames)
+                    {
+                        var evoltuionPokemon = await PokeApi.GetPokemonAsync(evolutionName);
+                        {
+                            if (evoltuionPokemon is not null)
+                            {
+                                var imageUrl = evoltuionPokemon.Sprites.Other.OfficialArtwork.FrontDefault
+                                ?? evoltuionPokemon.Sprites.FrontDefault;
+
+                                evolutionPicture.Add(new EvolutionDisplayItem
+                                {
+                                    Name = evoltuionPokemon.Name,
+                                    ImageUrl = imageUrl
+                                });
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -244,6 +275,12 @@
             _ => statName
         };
     }
+
+public class EvolutionDisplayItem
+{
+    public string Name { get; set; } = "";
+    public string? ImageUrl { get; set; }
+}
 
     private string GetPokemonBackgroundColor()
 {
