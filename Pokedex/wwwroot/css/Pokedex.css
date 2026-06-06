@@ -23,12 +23,14 @@ body {
     border-right: 4px solid var(--vxa-color-nav-meny-border);
     width: 20rem;
     height: 96vh;
-    /*padding-bottom: var(--vxa-spacing-13);*/
     padding-top: var(--vxa-spacing-13);
     padding-left: var(--vxa-spacing-4);
     padding-right: var(--vxa-spacing-4);
     position: sticky;
+    top: 0px;
     color: var( --vxa-color-nav-menu-text);
+    display: flex;
+    flex-direction: column;
 }
 
 input {
@@ -194,4 +196,9 @@ ul
     width: 170px;
     height: 170px;
     object-fit: contain;
+}
+
+.neturalPage {
+    margin-bottom: 10px;
+    color: var(--vxa-svart-100);
 }
