@@ -24,7 +24,12 @@
     <div class=container>
         @if (pokemon is null)
         {
-            <h3 style="color: #101828;">Pokémon Search</h3>
+            <h3 class="neturalPage">Welcome to my Pokedex!</h3>
+            @if (!hasSearched)
+            {
+                <p class="neturalPage">Please either select a pokemon from the list or search for a specific one.</p>
+            }
+
         }
         @if (isLoading)
         {
